@@ -1,5 +1,5 @@
 ---
-name: setup-instruction-file
+name: setup-instructions
 description: Set up the project instruction file (CLAUDE.md / AGENTS.md). Use when starting work on a new project that doesn't have an instruction file yet. Explores the codebase, drafts the instruction file, and asks the user to review and refine it.
 ---
 

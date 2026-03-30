@@ -16,15 +16,41 @@ A collection of three skills that work together as a pipeline for tackling ambit
 | `/create-plan` | Create a phased implementation plan from research findings |
 | `/implement-plan` | Execute a plan phase by phase with progress tracking |
 
-### [setup-instruction-file](./setup-instruction-file/)
+### [setup-instructions](./setup-instructions/)
 
 | Skill | Description |
 |-------|-------------|
-| `/setup-instruction-file` | Bootstrap a project instruction file (CLAUDE.md / AGENTS.md) by exploring the codebase and drafting a high-signal onboarding doc for the agent |
+| `/setup-instructions` | Bootstrap a project instruction file (CLAUDE.md / AGENTS.md) by exploring the codebase and drafting a high-signal onboarding doc for the agent |
 
 ## Installation
 
-Copy the skill directories you want into your tool's skills folder:
+The easiest way to install skills is with [agr](https://github.com/computerlovetech/agr), a package manager for agent skills.
+
+### Install agr
+
+```bash
+uv tool install agr    # recommended
+# or: pipx install agr
+# or: pip install agr
+```
+
+### Add skills
+
+Since this repo is named `skills`, you can use the shorthand `computerlovetech/<skill-name>` instead of `computerlovetech/skills/<skill-name>`:
+
+```bash
+# Install individual skills
+agr add computerlovetech/setup-instructions
+agr add computerlovetech/research-plan-implement/research-codebase
+agr add computerlovetech/research-plan-implement/create-plan
+agr add computerlovetech/research-plan-implement/implement-plan
+```
+
+agr detects your tool (Claude Code, Cursor, Copilot, etc.) and places the skills in the right directory automatically. Run `agr sync` on a new machine to install everything tracked in `agr.toml`.
+
+### Manual installation
+
+Alternatively, copy the skill directories directly into your tool's skills folder:
 
 | Tool | Skills directory |
 |------|-----------------|
