@@ -29,9 +29,7 @@ The easiest way to install skills is with [agr](https://github.com/computerlovet
 ### Install agr
 
 ```bash
-uv tool install agr    # recommended
-# or: pipx install agr
-# or: pip install agr
+uv tool install agr
 ```
 
 ### Add skills
@@ -41,25 +39,12 @@ Since this repo is named `skills`, you can use the shorthand `computerlovetech/<
 ```bash
 # Install individual skills
 agr add computerlovetech/setup-instructions
-agr add computerlovetech/research-plan-implement/research-codebase
-agr add computerlovetech/research-plan-implement/create-plan
-agr add computerlovetech/research-plan-implement/implement-plan
+agr add computerlovetech/research-codebase
+agr add computerlovetech/create-plan
+agr add computerlovetech/implement-plan
 ```
 
 agr detects your tool (Claude Code, Cursor, Copilot, etc.) and places the skills in the right directory automatically. Run `agr sync` on a new machine to install everything tracked in `agr.toml`.
-
-### Manual installation
-
-Alternatively, copy the skill directories directly into your tool's skills folder:
-
-| Tool | Skills directory |
-|------|-----------------|
-| Claude Code | `.claude/skills/` |
-| Cursor | `.cursor/skills/` |
-| GitHub Copilot | `.github/skills/` |
-| Codex | `.codex/skills/` |
-
-Then invoke a skill by typing `/skill-name` in your agent's chat.
 
 ## License
 
