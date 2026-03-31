@@ -22,6 +22,18 @@ A collection of three skills that work together as a pipeline for tackling ambit
 |-------|-------------|
 | `/setup-instructions` | Bootstrap a project instruction file (CLAUDE.md / AGENTS.md) by exploring the codebase and drafting a high-signal onboarding doc for the agent |
 
+### [docs-audit](./docs-audit/)
+
+| Skill | Description |
+|-------|-------------|
+| `/docs-audit` | Audit a CLI tool's documentation quality across the full user journey (A-F grading with actionable recommendations) |
+
+### [setup-agent-workspace](./setup-agent-workspace/)
+
+| Skill | Description |
+|-------|-------------|
+| `/setup-agent-workspace` | Set up a persistent `workspace/` directory for AI agents to store artifacts, reports, and notes across sessions |
+
 ## Installation
 
 The easiest way to install skills is with [agr](https://github.com/computerlovetech/agr), a package manager for agent skills.
@@ -42,6 +54,8 @@ agr add computerlovetech/setup-instructions
 agr add computerlovetech/research-codebase
 agr add computerlovetech/create-plan
 agr add computerlovetech/implement-plan
+agr add computerlovetech/docs-audit
+agr add computerlovetech/setup-agent-workspace
 ```
 
 agr detects your tool (Claude Code, Cursor, Copilot, etc.) and places the skills in the right directory automatically. Run `agr sync` on a new machine to install everything tracked in `agr.toml`.
