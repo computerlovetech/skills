@@ -34,6 +34,12 @@ A collection of three skills that work together as a pipeline for tackling ambit
 |-------|-------------|
 | `/setup-agent-workspace` | Set up a persistent `workspace/` directory for AI agents to store artifacts, reports, and notes across sessions |
 
+### [oss-growth-advisor](./oss-growth-advisor/)
+
+| Skill | Description |
+|-------|-------------|
+| `/oss-growth-advisor` | Analyze an open source repo's positioning, market context, and adoption signals, then produce blunt, execution-oriented growth advice for a solo creator (snapshot, scorecard, top actions, 30-day plan) |
+
 ## Installation
 
 The easiest way to install skills is with [agr](https://github.com/computerlovetech/agr), a package manager for agent skills.
@@ -56,6 +62,7 @@ agr add computerlovetech/create-plan
 agr add computerlovetech/implement-plan
 agr add computerlovetech/docs-audit
 agr add computerlovetech/setup-agent-workspace
+agr add computerlovetech/oss-growth-advisor
 ```
 
 agr detects your tool (Claude Code, Cursor, Copilot, etc.) and places the skills in the right directory automatically. Run `agr sync` on a new machine to install everything tracked in `agr.toml`.
