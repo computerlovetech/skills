@@ -40,6 +40,18 @@ A collection of three skills that work together as a pipeline for tackling ambit
 |-------|-------------|
 | `/oss-growth-advisor` | Analyze an open source repo's positioning, market context, and adoption signals, then produce blunt, execution-oriented growth advice for a solo creator (snapshot, scorecard, top actions, 30-day plan) |
 
+### [create-ralph](./create-ralph/)
+
+| Skill | Description |
+|-------|-------------|
+| `/create-ralph` | Draft a high-quality `RALPH.md` for the [ralphify](https://github.com/computerlovetech/ralphify) autonomous-agent-loop runtime: asks scoping questions, explores the project for real test/lint/type commands, drafts from scratch using the canonical 5-section body shape, bundles helper scripts when commands need shell features, and presents for review before writing |
+
+### [distributed-plan-mode](./distributed-plan-mode/)
+
+| Skill | Description |
+|-------|-------------|
+| `/distributed-plan-mode` | Drive a Claude-Code-style plan-mode interview for ambitious work and emit a set of small, self-contained plan files (one unit of work each, ordered by filename) that a fresh-context agent or the `execute-plans` ralph can ship independently. Uses Claude Code's own plan file format — Context, recommended approach, critical files, existing code to reuse, verification — rather than a heavier framework |
+
 ## Installation
 
 The easiest way to install skills is with [agr](https://github.com/computerlovetech/agr), a package manager for agent skills.
@@ -63,6 +75,7 @@ agr add computerlovetech/implement-plan
 agr add computerlovetech/docs-audit
 agr add computerlovetech/setup-agent-workspace
 agr add computerlovetech/oss-growth-advisor
+agr add computerlovetech/create-ralph
 ```
 
 agr detects your tool (Claude Code, Cursor, Copilot, etc.) and places the skills in the right directory automatically. Run `agr sync` on a new machine to install everything tracked in `agr.toml`.

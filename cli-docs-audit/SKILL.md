@@ -1,5 +1,5 @@
 ---
-name: docs-audit
+name: cli-docs-audit
 description: >
   Audit a CLI tool's documentation quality across the full user journey — from first
   discovery to power user. Designed for CLI projects: developer tools, package managers,
