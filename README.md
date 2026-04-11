@@ -22,23 +22,11 @@ A collection of three skills that work together as a pipeline for tackling ambit
 |-------|-------------|
 | `/setup-instructions` | Bootstrap a project instruction file (CLAUDE.md / AGENTS.md) by exploring the codebase and drafting a high-signal onboarding doc for the agent |
 
-### [docs-audit](./docs-audit/)
-
-| Skill | Description |
-|-------|-------------|
-| `/docs-audit` | Audit a CLI tool's documentation quality across the full user journey (A-F grading with actionable recommendations) |
-
 ### [setup-agent-workspace](./setup-agent-workspace/)
 
 | Skill | Description |
 |-------|-------------|
 | `/setup-agent-workspace` | Set up a persistent `workspace/` directory for AI agents to store artifacts, reports, and notes across sessions |
-
-### [oss-growth-advisor](./oss-growth-advisor/)
-
-| Skill | Description |
-|-------|-------------|
-| `/oss-growth-advisor` | Analyze an open source repo's positioning, market context, and adoption signals, then produce blunt, execution-oriented growth advice for a solo creator (snapshot, scorecard, top actions, 30-day plan) |
 
 ### [create-ralph](./create-ralph/)
 
@@ -51,6 +39,18 @@ A collection of three skills that work together as a pipeline for tackling ambit
 | Skill | Description |
 |-------|-------------|
 | `/distributed-plan-mode` | Drive a Claude-Code-style plan-mode interview for ambitious work and emit a set of small, self-contained plan files (one unit of work each, ordered by filename) that a fresh-context agent or the `execute-plans` ralph can ship independently. Uses Claude Code's own plan file format — Context, recommended approach, critical files, existing code to reuse, verification — rather than a heavier framework |
+
+### [brand-guidelines-computerlove](./brand-guidelines-computerlove/)
+
+| Skill | Description |
+|-------|-------------|
+| `/brand-guidelines-computerlove` | Apply Computer Love's official brand colors and typography to any artifact that may benefit from the company look-and-feel. Use when brand colors, style guidelines, visual formatting, or company design standards apply |
+
+### [making-presentations](./making-presentations/)
+
+| Skill | Description |
+|-------|-------------|
+| `/making-presentations` | Create or extend static HTML slide decks under `presentations/` using the shared iframe shell, `slides.js` manifest, and per-slide HTML. Designed for repos that follow the `PRESENTATION_GUIDE.md` architecture |
 
 ## Installation
 
@@ -72,10 +72,11 @@ agr add computerlovetech/setup-instructions
 agr add computerlovetech/research-codebase
 agr add computerlovetech/create-plan
 agr add computerlovetech/implement-plan
-agr add computerlovetech/docs-audit
 agr add computerlovetech/setup-agent-workspace
-agr add computerlovetech/oss-growth-advisor
 agr add computerlovetech/create-ralph
+agr add computerlovetech/distributed-plan-mode
+agr add computerlovetech/brand-guidelines-computerlove
+agr add computerlovetech/making-presentations
 ```
 
 agr detects your tool (Claude Code, Cursor, Copilot, etc.) and places the skills in the right directory automatically. Run `agr sync` on a new machine to install everything tracked in `agr.toml`.
