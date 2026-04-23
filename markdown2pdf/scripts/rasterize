@@ -1,0 +1,66 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.10"
+# dependencies = []
+# ///
+"""Rasterize a PDF to PNGs for visual inspection by an agent.
+
+Writes pages to a clean output directory and prints each PNG's absolute path,
+one per line, so the caller can pipe them into a Read tool.
+"""
+
+from __future__ import annotations
+
+import argparse
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser(description="Rasterize a PDF into PNG pages.")
+    ap.add_argument("pdf", help="Path to the PDF file")
+    ap.add_argument(
+        "-o",
+        "--output-dir",
+        default="/tmp/pdf-preview",
+        help="Output directory (cleared before write). Default: /tmp/pdf-preview",
+    )
+    ap.add_argument("-r", "--resolution", type=int, default=120, help="DPI (default: 120)")
+    ap.add_argument("--prefix", default="page", help="Filename prefix (default: page)")
+    args = ap.parse_args()
+
+    pdf_path = Path(args.pdf).expanduser().resolve()
+    if not pdf_path.is_file():
+        sys.exit(f"error: pdf not found: {pdf_path}")
+
+    if not shutil.which("pdftoppm"):
+        sys.exit(
+            "error: pdftoppm not found. Install poppler:\n"
+            "  macOS:  brew install poppler\n"
+            "  Debian: apt-get install poppler-utils"
+        )
+
+    out_dir = Path(args.output_dir).expanduser().resolve()
+    if out_dir.exists():
+        shutil.rmtree(out_dir)
+    out_dir.mkdir(parents=True)
+
+    prefix_path = out_dir / args.prefix
+    cmd = ["pdftoppm", "-png", "-r", str(args.resolution), str(pdf_path), str(prefix_path)]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    if result.returncode != 0:
+        sys.stderr.write(result.stderr)
+        sys.exit(result.returncode)
+
+    pages = sorted(out_dir.glob(f"{args.prefix}-*.png"))
+    if not pages:
+        sys.exit(f"error: pdftoppm produced no pages in {out_dir}")
+
+    for p in pages:
+        print(p)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,122 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.10"
+# dependencies = [
+#     "markdown-it-py>=3.0",
+#     "mdit-py-plugins>=0.4",
+#     "pygments>=2.17",
+#     "weasyprint>=62",
+# ]
+# ///
+"""Render a Markdown file to a styled PDF using HTML+CSS.
+
+CSS resolution order:
+  1. --css <path>                        (explicit)
+  2. ./.markdown2pdf/style.css           (project convention)
+  3. <skill>/assets/default.css          (bundled fallback)
+"""
+
+from __future__ import annotations
+
+import argparse
+import os
+import sys
+from pathlib import Path
+
+from markdown_it import MarkdownIt
+from mdit_py_plugins.anchors import anchors_plugin
+from mdit_py_plugins.footnote import footnote_plugin
+from mdit_py_plugins.tasklists import tasklists_plugin
+from weasyprint import CSS, HTML
+
+
+SKILL_ROOT = Path(__file__).resolve().parent.parent
+BUNDLED_CSS = SKILL_ROOT / "assets" / "default.css"
+BUNDLED_TEMPLATE = SKILL_ROOT / "assets" / "template.html"
+
+
+def resolve_css(explicit: str | None, md_path: Path) -> Path:
+    if explicit:
+        p = Path(explicit).expanduser().resolve()
+        if not p.is_file():
+            sys.exit(f"error: --css file not found: {p}")
+        return p
+
+    project_css = Path.cwd() / ".markdown2pdf" / "style.css"
+    if project_css.is_file():
+        return project_css
+
+    return BUNDLED_CSS
+
+
+def resolve_template(explicit: str | None) -> Path:
+    if explicit:
+        p = Path(explicit).expanduser().resolve()
+        if not p.is_file():
+            sys.exit(f"error: --template file not found: {p}")
+        return p
+    return BUNDLED_TEMPLATE
+
+
+def build_parser() -> MarkdownIt:
+    md = (
+        MarkdownIt("commonmark", {"html": True, "linkify": True, "typographer": True})
+        .enable(["table", "strikethrough"])
+        .use(anchors_plugin, permalink=False)
+        .use(footnote_plugin)
+        .use(tasklists_plugin)
+    )
+    return md
+
+
+def render_html(md_text: str, title: str, template: Path) -> str:
+    parser = build_parser()
+    body_html = parser.render(md_text)
+    shell = template.read_text(encoding="utf-8")
+    return shell.replace("{{title}}", title).replace("{{body}}", body_html)
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser(description="Render Markdown to PDF.")
+    ap.add_argument("markdown", help="Path to the input .md file")
+    ap.add_argument("--css", help="CSS file to apply (overrides project/bundled)")
+    ap.add_argument("--template", help="HTML shell template (overrides bundled)")
+    ap.add_argument("-o", "--output", help="Output PDF path (default: <md>.pdf)")
+    ap.add_argument(
+        "--dump-html",
+        action="store_true",
+        help="Also write the intermediate HTML next to the PDF (for debugging)",
+    )
+    args = ap.parse_args()
+
+    md_path = Path(args.markdown).expanduser().resolve()
+    if not md_path.is_file():
+        sys.exit(f"error: markdown file not found: {md_path}")
+
+    out_path = Path(args.output).expanduser().resolve() if args.output else md_path.with_suffix(".pdf")
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+
+    css_path = resolve_css(args.css, md_path)
+    template_path = resolve_template(args.template)
+
+    title = md_path.stem.replace("_", " ").replace("-", " ")
+    md_text = md_path.read_text(encoding="utf-8")
+    html_str = render_html(md_text, title, template_path)
+
+    if args.dump_html:
+        html_out = out_path.with_suffix(".html")
+        html_out.write_text(html_str, encoding="utf-8")
+        print(f"HTML: {html_out}")
+
+    base_url = str(md_path.parent)
+    HTML(string=html_str, base_url=base_url).write_pdf(
+        target=str(out_path),
+        stylesheets=[CSS(filename=str(css_path))],
+    )
+
+    print(f"PDF:  {out_path}")
+    print(f"CSS:  {css_path}")
+
+
+if __name__ == "__main__":
+    main()

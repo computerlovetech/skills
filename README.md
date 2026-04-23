@@ -52,6 +52,12 @@ A collection of three skills that work together as a pipeline for tackling ambit
 |-------|-------------|
 | `/making-presentations` | Create or extend static HTML slide decks under `presentations/` using the shared iframe shell, `slides.js` manifest, and per-slide HTML. Designed for repos that follow the `PRESENTATION_GUIDE.md` architecture |
 
+### [markdown2pdf](./markdown2pdf/)
+
+| Skill | Description |
+|-------|-------------|
+| `/markdown2pdf` | Convert a Markdown file to a styled PDF and iterate on the design visually. Renders via `markdown-it-py` + WeasyPrint; styling is decoupled as a single CSS file (pass `--css`, drop a `./.markdown2pdf/style.css`, or fall back to the bundled neutral default) so any brand/theme skill can plug in |
+
 ## Installation
 
 The easiest way to install skills is with [agr](https://github.com/computerlovetech/agr), a package manager for agent skills.
@@ -77,6 +83,7 @@ agr add computerlovetech/create-ralph
 agr add computerlovetech/distributed-plan-mode
 agr add computerlovetech/brand-guidelines-computerlove
 agr add computerlovetech/making-presentations
+agr add computerlovetech/markdown2pdf
 ```
 
 agr detects your tool (Claude Code, Cursor, Copilot, etc.) and places the skills in the right directory automatically. Run `agr sync` on a new machine to install everything tracked in `agr.toml`.

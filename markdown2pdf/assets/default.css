@@ -1,0 +1,146 @@
+/* markdown2pdf — neutral default theme.
+ *
+ * Override by passing --css <path> or placing a CSS file at
+ * ./.markdown2pdf/style.css in the project root.
+ */
+
+@page {
+  size: A4;
+  margin: 22mm 20mm 22mm 20mm;
+
+  @bottom-right {
+    content: counter(page);
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 9pt;
+    color: #888;
+  }
+}
+
+html {
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.5;
+  color: #1a1a1e;
+}
+
+body { margin: 0; }
+
+.doc { max-width: 100%; }
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  page-break-after: avoid;
+  break-after: avoid;
+  margin: 1.4em 0 0.5em;
+}
+h1 {
+  font-size: 22pt;
+  margin-top: 0;
+  border-bottom: 1.5pt solid #1a1a1e;
+  padding-bottom: 0.2em;
+}
+h2 { font-size: 16pt; }
+h3 { font-size: 13pt; }
+h4 { font-size: 11.5pt; }
+h5, h6 { font-size: 10.5pt; text-transform: uppercase; letter-spacing: 0.04em; }
+
+/* Paragraphs */
+p { margin: 0 0 0.7em; }
+
+/* Links */
+a { color: #0a58ca; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Lists */
+ul, ol { margin: 0 0 0.8em 1.3em; padding: 0; }
+li { margin: 0.1em 0; }
+li > ul, li > ol { margin-top: 0.2em; margin-bottom: 0.2em; }
+
+/* Inline code */
+code {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.92em;
+  background: #f3f3f5;
+  padding: 0.08em 0.35em;
+  border-radius: 3px;
+}
+
+/* Code blocks */
+pre {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 9pt;
+  line-height: 1.45;
+  background: #f6f6f8;
+  border: 0.5pt solid #e2e2e6;
+  border-radius: 4px;
+  padding: 10px 12px;
+  margin: 0.7em 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+pre code { background: none; padding: 0; font-size: inherit; border-radius: 0; }
+
+/* Blockquotes / callouts */
+blockquote {
+  margin: 0.9em 0;
+  padding: 0.6em 0.9em;
+  background: #fafafa;
+  border-left: 3pt solid #888;
+  color: #444;
+}
+blockquote > p:last-child { margin-bottom: 0; }
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.8em 0;
+  font-size: 9.5pt;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+th, td {
+  border: 0.5pt solid #d8d8dc;
+  padding: 6px 8px;
+  text-align: left;
+  vertical-align: top;
+}
+thead th {
+  background: #1a1a1e;
+  color: #fff;
+  font-weight: 600;
+}
+tbody tr:nth-child(even) td { background: #fafafa; }
+
+/* Horizontal rules */
+hr {
+  border: none;
+  border-top: 0.5pt solid #d8d8dc;
+  margin: 1.2em 0;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+/* Task lists (mdit tasklists) */
+ul.contains-task-list { list-style: none; margin-left: 1em; }
+input[type="checkbox"] { margin-right: 0.4em; }
+
+/* Footnotes */
+.footnotes {
+  margin-top: 2em;
+  padding-top: 0.6em;
+  border-top: 0.5pt solid #d8d8dc;
+  font-size: 9pt;
+  color: #444;
+}
