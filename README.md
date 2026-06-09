@@ -58,6 +58,12 @@ A collection of three skills that work together as a pipeline for tackling ambit
 |-------|-------------|
 | `/markdown2pdf` | Convert a Markdown file to a styled PDF and iterate on the design visually. Renders via `markdown-it-py` + WeasyPrint; styling is decoupled as a single CSS file (pass `--css`, drop a `./.markdown2pdf/style.css`, or fall back to the bundled neutral default) so any brand/theme skill can plug in |
 
+### [smoke-and-mirrors-ui-prototyping](./smoke-and-mirrors-ui-prototyping/)
+
+| Skill | Description |
+|-------|-------------|
+| `/smoke-and-mirrors-ui-prototyping` | Build a convincing front-of-house prototype where the hard parts are faked — hardcoded data, canned responses, mocked services, wizard-of-oz flows — so a real-feeling experience can be demoed and validated before any of the expensive backend is built |
+
 ## Installation
 
 The easiest way to install skills is with [agr](https://github.com/computerlovetech/agr), a package manager for agent skills.
@@ -84,6 +90,7 @@ agr add computerlovetech/distributed-plan-mode
 agr add computerlovetech/brand-guidelines-computerlove
 agr add computerlovetech/making-presentations
 agr add computerlovetech/markdown2pdf
+agr add computerlovetech/smoke-and-mirrors-ui-prototyping
 ```
 
 agr detects your tool (Claude Code, Cursor, Copilot, etc.) and places the skills in the right directory automatically. Run `agr sync` on a new machine to install everything tracked in `agr.toml`.
