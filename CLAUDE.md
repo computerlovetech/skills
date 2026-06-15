@@ -7,8 +7,8 @@ A registry of open-source agent skills published by computerlove.tech. Each top-
 ## Layout
 
 - `<skill-name>/SKILL.md` — the skill definition. Frontmatter `name:` must match the directory name.
-- `README.md` — the public index of skills in this repo. Used by people browsing on GitHub and by anyone discovering what's installable via `agr add computerlovetech/<skill-name>`.
+- `README.md` — the public landing page. It explains what the repo is and how to install skills with `agr`, but intentionally does **not** enumerate individual skills, so it doesn't need updating when skills are added, removed, or renamed.
 
-## Keep README.md up to date
+## README.md
 
-**When you add, remove, or rename a skill, update `README.md` in the same change.** The README lists every skill with a description and shows the `agr add` command for each one — it goes stale fast if skill changes land without touching it. Check before committing that every skill folder has a corresponding README entry and every README entry points to a folder that still exists.
+The README is deliberately generic — people discover skills by browsing the folders and reading each `SKILL.md`. Don't add a per-skill list or table back to it; that's what went stale before. Only touch the README when the repo's purpose or install instructions actually change.
