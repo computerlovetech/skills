@@ -1,0 +1,26 @@
+# agr.toml — register in-repo CLI skills so they travel with the repo and fan
+# out to every configured agent tool. Replace <tool> and <owner>.
+
+default_source = "github"
+
+# Agent tools to install skills into.
+tools = ["claude", "codex", "opencode"]
+
+# Default GitHub owner/repo for short handles (e.g. "skill" -> "<owner>/skills/skill").
+default_owner = "<owner>"
+default_repo = "skills"
+
+# Optional: mirror one canonical instruction file to the others.
+# sync_instructions = true
+# canonical_instructions = "CLAUDE.md"
+
+dependencies = [
+    # In-repo skills as local path deps — no network needed, reviewable in PRs.
+    {path = "skills/<tool>-cli", type = "skill"},
+    {path = "skills/<tool>-release", type = "skill"},
+]
+
+[[source]]
+name = "github"
+type = "git"
+url = "https://github.com/{owner}/{repo}.git"

@@ -1,0 +1,43 @@
+# .github/workflows/test.yml
+# CI: quality + tests on every push/PR to main.
+# Split into parallel jobs for clearer failure signals. For a small project you
+# can collapse these into sequential steps in one job instead.
+
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv python install 3.12
+      - run: uv sync --dev
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+      - run: uv run ty check
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv python install 3.12
+      - run: uv sync --dev
+      - run: uv run pytest -m "not e2e and not network and not slow"
+
+  # Optional — delete if the project has no docs.
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv python install 3.12
+      - run: uv sync --dev
+      - run: uv run mkdocs build --strict
