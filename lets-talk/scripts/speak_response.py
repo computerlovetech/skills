@@ -14,7 +14,7 @@ import urllib.error
 import urllib.request
 
 API = "https://api.elevenlabs.io/v1"
-DEFAULT_VOICE_ID = "cjVigY5qzO86Huf0OWal"
+DEFAULT_VOICE_ID = "21m00Tcm4TlvDq8ikWAM"
 DEFAULT_MODEL_ID = "eleven_flash_v2_5"
 DEFAULT_EXPRESSIVE_MODEL_ID = "eleven_v3"
 DEFAULT_OUTPUT_FORMAT = "mp3_44100_128"

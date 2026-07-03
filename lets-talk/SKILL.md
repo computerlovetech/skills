@@ -1,12 +1,12 @@
 ---
 name: lets-talk
-description: Speak replies aloud through the ElevenLabs API during a conversational voice session. Use this skill whenever the user's prompt starts with "Let's talk" or "Okay, let's talk", or when the user says they want a speech session, voice session, spoken session, wants you to talk out loud, mentions using Wispr Flow for dictation, or asks you to answer with ElevenLabs audio instead of normal chat. In this mode, speak first and keep visible text minimal unless the user needs to read, copy, inspect, or confirm something.
+description: Speak replies aloud through the ElevenLabs API during a conversational voice session. Use this skill whenever the user's prompt starts with "Let's talk" or "Okay, let's talk", or when the user says they want a speech session, voice session, spoken session, wants you to talk out loud, mentions using Wispr Flow or another dictation tool, or asks you to answer with ElevenLabs audio instead of normal chat. In this mode, speak first and keep visible text minimal unless the user needs to read, copy, inspect, or confirm something.
 ---
 
 # Let's Talk
 
 Use this skill when the user wants an interactive spoken conversation. The user
-handles speech-to-text with Wispr Flow, so your job is text-to-speech output.
+handles speech-to-text outside this skill, so your job is text-to-speech output.
 
 ## Core behavior
 
@@ -38,8 +38,7 @@ it is usually `.claude/skills/lets-talk/scripts/speak_response.py`.
 The script reads:
 
 - `ELEVENLABS_API_KEY` or `ELEVEN_API_KEY`
-- `ELEVENLABS_VOICE_ID`, defaulting to the same voice used by
-  `Code/kraenhansen/private/elevenlabs-claude-voice`
+- `ELEVENLABS_VOICE_ID`, defaulting to Rachel, a clear stock ElevenLabs voice
 - `ELEVENLABS_MODEL_ID`, defaulting to `eleven_flash_v2_5`
 - `ELEVENLABS_EXPRESSIVE=true`, which switches the default model to `eleven_v3`
 - `ELEVENLABS_AUDIO_PLAYER`, if a specific local player command is needed
@@ -66,7 +65,7 @@ For a coding or workspace task:
 
 Prefer:
 
-- "I found the existing ElevenLabs wrapper. It already has the voice and model defaults we need."
+- "I can speak this back to you and keep the visible notes short."
 - "I need to show you the exact command, because it is something you may want to copy."
 - "The tests passed. There is one visible path below so you can inspect the change."
 
@@ -75,10 +74,3 @@ Avoid:
 - "Here is a comprehensive summary with five bullets."
 - "Backtick python space dash m pytest colon ..."
 - Long explanations that would be tiring to listen to.
-
-## Relationship to the existing project
-
-The workspace also contains
-`Code/kraenhansen/private/elevenlabs-claude-voice`, a fuller Claude Code wrapper
-that uses `<speak>` tags. This skill does not require that wrapper to be active.
-It calls ElevenLabs directly so it can be invoked from a normal agent session.
