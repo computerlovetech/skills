@@ -1,28 +1,31 @@
 # Agent Skills by computerlove.tech
 
-A registry of open-source agent skills published by [computerlove.tech](https://computerlove.tech).
+The agent skills we use every day at [computerlove.tech](https://computerlove.tech), shared with the world.
 
-Skills are portable workflow definitions that coding agents can follow. Each skill is a folder containing a `SKILL.md` file that encodes a repeatable workflow — the agent reads the markdown and executes the steps. Skills follow the [Agent Skills open standard](https://agentskills.io).
+These aren't demos. Each skill here earns its place by being part of how we actually work with coding agents. When we stop using a skill, we remove it.
+
+Skills are small, plain-markdown folders that follow the [Agent Skills open standard](https://agentskills.io). They work with Claude Code, Codex, Cursor, GitHub Copilot, Gemini CLI and any other agent that supports the standard. Read them, fork them, and change them to fit how you work.
+
+## Install
+
+Install with [`skills`](https://github.com/vercel-labs/skills), the open agent skills CLI from Vercel:
+
+```bash
+# Pick from all skills in this repo
+npx skills@latest add computerlovetech/skills
+
+# Install a specific skill
+npx skills@latest add computerlovetech/skills --skill <skill-name>
+
+# List available skills without installing
+npx skills@latest add computerlovetech/skills --list
+```
+
+The CLI detects your agent and puts each skill in the right place.
 
 ## Browse the skills
 
-Every top-level folder in this repo is a skill. Open its `SKILL.md` to see what it does — the frontmatter `name` and `description` explain the workflow and when to use it.
-
-## Installation
-
-The easiest way to install skills is with [agr](https://github.com/computerlovetech/agr), a package manager for agent skills.
-
-```bash
-# Install agr
-uv tool install agr
-
-# Add a skill (use the name of any folder in this repo)
-agr add computerlovetech/<skill-name>
-```
-
-Since this repo is named `skills`, the shorthand `computerlovetech/<skill-name>` works in place of `computerlovetech/skills/<skill-name>`.
-
-agr detects your tool (Claude Code, Cursor, Copilot, etc.) and places the skill in the right directory automatically. Run `agr sync` on a new machine to install everything tracked in `agr.toml`.
+Every top-level folder is a skill. Open its `SKILL.md` to see what it does. The frontmatter `name` and `description` explain the workflow and when the agent should use it.
 
 ## License
 
