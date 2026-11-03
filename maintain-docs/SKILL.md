@@ -7,17 +7,24 @@ description: Run one unattended maintenance pass over a repository's Markdown do
 
 One run of this skill is one maintenance pass. It is designed to run unattended, for example nightly, and to produce at most one small, reviewable pull request. If nothing needs changing, it changes nothing.
 
-## 1. Orient
+## 1. Start from the latest default branch
+
+Before reading or checking anything, make sure the checkout matches the remote's latest default branch. Every later step analyzes this state, so a stale checkout means stale results.
+
+- Identify the default branch (for example `main`), fetch it from the remote, check it out, and fast-forward it to the remote: `git fetch origin <default>`, `git checkout <default>`, `git pull --ff-only origin <default>`.
+- If the working tree has uncommitted changes, or the local default branch has diverged from the remote, stop and report it. Never stash, reset, or discard someone else's work to get a clean state.
+
+## 2. Orient
 
 Learn the repository before touching it.
 
 - Read its agent and contributor entry points: `AGENTS.md`, `CLAUDE.md`, `CONTRIBUTING.md`, `README.md`, and the root of any `docs/` directory.
 - Adopt any documentation conventions they state — where docs live, how they are indexed, naming, tone. The repository's own conventions override the defaults in this skill.
-- Identify the default branch and the files in scope: tracked Markdown files the repository owns.
+- Identify the files in scope: tracked Markdown files the repository owns.
 - Exclude anything vendored, generated, or read-only: paths ignored by Git, dependency directories (`node_modules/`, `vendor/`, `.venv/`), build output, generated API docs, changelogs written by release tooling, and anything the repository marks as reference-only or external.
 - Check for an open pull request from a previous run of this skill. If one exists, update that branch instead of opening a second one, or stop if it is awaiting review and you have nothing new.
 
-## 2. Find what to look at
+## 3. Find what to look at
 
 Prefer a focused pass over re-reading everything.
 
@@ -25,7 +32,7 @@ Prefer a focused pass over re-reading everything.
 - Map changed code to the docs that describe it: docs in or near the changed directories, docs that mention changed file paths, commands, scripts, environment variables, or identifiers.
 - Run the repository-wide mechanical checks (links, references, reachability) on every in-scope file. They are cheap and exact.
 
-## 3. Checks
+## 4. Checks
 
 ### Correctness
 
@@ -49,16 +56,16 @@ Prefer a focused pass over re-reading everything.
 - **Link labels.** Use descriptive labels that say what the target covers, not "here" or bare URLs.
 - **Gaps.** Note significant code areas — a new app, package, or service — that have no documentation entry point. Report them; do not invent documentation for behavior you cannot verify.
 
-## 4. Make changes
+## 5. Make changes
 
-- Work on a new branch from the up-to-date default branch. Never commit to the default branch.
+- Work on a new branch created from the default branch updated in step 1. Never commit to the default branch.
 - Change only what a check justifies. Keep the diff small enough to review in a few minutes; if there is more to do, do the most valuable part and leave the rest for the next run.
 - Every factual change must be verifiable from the code at the current commit. When you cannot tell whether the code or the doc is wrong, do not guess — report it.
 - Preserve the author's structure and voice. Don't reorganize documentation wholesale in an unattended run; propose large restructurings in the report instead.
 - When moving, renaming, or deleting a document, update every link that points to it.
 - Group commits by theme, such as "sync docs with code", "fix links", and "remove duplication".
 
-## 5. Report
+## 6. Report
 
 Open one pull request, or update the existing one. Its description lists:
 
