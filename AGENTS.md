@@ -2,11 +2,12 @@
 
 ## What this is
 
-A registry of open-source agent skills published by computerlove.tech. Each top-level folder is one skill (or a tightly related collection) containing a `SKILL.md` that defines a repeatable workflow an agent can follow. Skills follow the [Agent Skills open standard](https://agentskills.io) and are installed with [`npx skills`](https://github.com/vercel-labs/skills).
+A registry of open-source agent skills published by computerlove.tech. Skills live under `skills/`, each in a folder containing a `SKILL.md` that defines a repeatable workflow an agent can follow. Skills follow the [Agent Skills open standard](https://agentskills.io) and are installed with [`npx skills`](https://github.com/vercel-labs/skills).
 
 ## Layout
 
-- `<skill-name>/SKILL.md` — the skill definition. Frontmatter `name:` must match the directory name.
+- `skills/<skill-name>/SKILL.md` — the skill definition. Frontmatter `name:` must match the directory name.
+- `skills/in-progress/<skill-name>/SKILL.md` — skills being drafted or developed.
 - `README.md` — the public landing page. It explains what the repo is and how to install skills with `npx skills`, but intentionally does **not** enumerate individual skills, so it doesn't need updating when skills are added, removed, or renamed.
 
 ## README.md

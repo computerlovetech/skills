@@ -25,7 +25,7 @@ The CLI detects your agent and puts each skill in the right place.
 
 ## Browse the skills
 
-Every top-level folder is a skill. Open its `SKILL.md` to see what it does. The frontmatter `name` and `description` explain the workflow and when the agent should use it.
+Skills live in `skills/`, with drafts under `skills/in-progress/`. Open a skill's `SKILL.md` to see what it does. The frontmatter `name` and `description` explain the workflow and when the agent should use it.
 
 ## License
 
