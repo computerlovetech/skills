@@ -63,13 +63,21 @@ Prefer a focused pass over re-reading everything.
 - Every factual change must be verifiable from the code at the current commit. When you cannot tell whether the code or the doc is wrong, do not guess — report it.
 - Preserve the author's structure and voice. Don't reorganize documentation wholesale in an unattended run; propose large restructurings in the report instead.
 - When moving, renaming, or deleting a document, update every link that points to it.
-- Group commits by theme, such as "sync docs with code", "fix links", and "remove duplication".
+- Make one commit per change, so each can be reviewed on its own. The subject says what changed; the body says why in one line — for sync changes, the code it now matches. For example: `Fix install command in README` / `package.json renamed setup to bootstrap`.
 
 ## 6. Report
 
-Open one pull request, or update the existing one. Its description lists:
+Open one pull request, or update the existing one. Keep the description short enough to review at a glance:
 
-- **Changes**, grouped by theme, each with the file and a one-line reason — for sync changes, the code it now matches.
-- **Needs a human**: code-versus-doc conflicts you could not resolve, unresolved `TODO`s, undocumented areas, and suggested restructurings.
+- **Summary**: one sentence on what the pass did.
+- **Changes**: a table with one row per commit.
+
+  | Change | File | Why |
+  | --- | --- | --- |
+  | Fix install command | `README.md` | `package.json` renamed `setup` to `bootstrap` |
+
+- **Needs a human**: a bullet list of code-versus-doc conflicts you could not resolve, unresolved `TODO`s, undocumented areas, and suggested restructurings. Omit the section if empty.
+
+No other sections, no restating the diff, no description of the process.
 
 If there are no changes but there are items that need a human, report them without a pull request — for example as an issue — or in the run's output, whichever the repository or the caller prefers. If there is nothing at all, end the run without opening anything.
