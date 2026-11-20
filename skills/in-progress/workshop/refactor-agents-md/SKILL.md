@@ -4,7 +4,7 @@ description: Refactor an AGENTS.md into a wiki of linked Markdown pages. Use whe
 ---
 
 A good AGENTS.md file should hold:
-1. Information that an agent can't easily infer from the repo.
+1. Information that an agent can't infer from the repo.
 2. Information that can save the agent effort discovering important things about the repo. 
 
 However, the AGENTS.md file is always loaded into the agent's context, so it should be kept as short as possible. If the AGENTS.md file is longer than 100 lines, the information it contains should be refactored into other Markdown files. Those files should be discoverable from AGENTS.md so the agent can look up important information when it needs it, following the progressive disclosure pattern.
