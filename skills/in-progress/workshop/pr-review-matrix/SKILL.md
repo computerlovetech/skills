@@ -1,5 +1,5 @@
 ---
-name: review-pr-matrix
+name: pr-review-matrix
 description: Review a pull request or branch diff with a compact matrix of change types and review criteria. Use for PR review overviews, matrix-based code reviews, and requests to mark which review checks a PR satisfies.
 ---
 
